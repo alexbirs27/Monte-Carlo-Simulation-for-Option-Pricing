@@ -113,3 +113,10 @@ The number of simulations is determined using Hoeffding’s inequality to ensure
 
 ![JNJ](image.png)
 
+
+### Additional Resources
+- **Monte Carlo Simulation for Finance**: [https://en.wikipedia.org/wiki/Monte_Carlo_method](https://en.wikipedia.org/wiki/Monte_Carlo_method)
+- **Geometric Brownian Motion**: [https://en.wikipedia.org/wiki/Geometric_Brownian_motion](https://en.wikipedia.org/wiki/Geometric_Brownian_motion)
+- **Option Pricing Theory**: [https://www.investopedia.com/terms/o/option-pricing-theory.asp](https://www.investopedia.com/terms/o/option-pricing-theory.asp)
+- **QuantPy**: [https://www.youtube.com/watch?v=6-dhdMDiYWQ&list=PLqpCwow11-OqqfELduCMcRI6wcnoM3GAZ&index=1](https://www.youtube.com/watch?v=6-dhdMDiYWQ&list=PLqpCwow11-OqqfELduCMcRI6wcnoM3GAZ&index=1)
+- **QuantPy Github**: [https://github.com/TheQuantPy/youtube-tutorials/blob/8e64e19629cee840928b51baf4660e5c777e87e7/2020/001%20Oct-Dec/2020-11-24%20Value%20at%20Risk%20(VaR)%20Explained!.ipynb](https://github.com/TheQuantPy/youtube-tutorials/blob/8e64e19629cee840928b51baf4660e5c777e87e7/2020/001%20Oct-Dec/2020-11-24%20Value%20at%20Risk%20(VaR)%20Explained!.ipynb)
