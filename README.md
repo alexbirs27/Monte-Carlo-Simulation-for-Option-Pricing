@@ -45,7 +45,12 @@ To configure the system for matplotlib, set the necessary environment variables:
 export TCL_LIBRARY="<path_to_tcl>"
 export TK_LIBRARY="<path_to_tk>"
 ```
-
+### For Python:
+```python
+import os
+os.environ['TCL_LIBRARY'] = "<path_to_tcl>"
+os.environ['TK_LIBRARY'] = "<path_to_tk>"
+```
 ## Mathematical Model
 
 ### Geometric Brownian Motion (GBM)
