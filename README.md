@@ -111,4 +111,5 @@ Results are visualized using histograms to represent the distribution of simulat
 ### Accuracy and Confidence
 The number of simulations is determined using Hoeffding’s inequality to ensure that the estimated option price falls within a tolerable error range with a confidence level of 95%.
 
+![JNJ](image.png)
 
