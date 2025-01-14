@@ -6,19 +6,15 @@ This project leverages Monte Carlo simulation to forecast future stock prices us
 
 ## Contents
 - [Project Setup](#project-setup)
-  - [Dependencies](#dependencies)
-  - [Installation](#installation)
-  - [Environmental Variables](#environmental-variables)
 - [Mathematical Model](#mathematical-model)
   - [Geometric Brownian Motion (GBM)](#geometric-brownian-motion-gbm)
   - [Monte Carlo Simulation](#monte-carlo-simulation)
   - [Discounting to Present Value](#discounting-to-present-value)
 - [Implementation Details](#implementation-details)
-  - [Data Acquisition](#data-acquisition)
-  - [Simulation Execution](#simulation-execution)
-  - [Visualization](#visualization)
 - [Evaluation and Results](#evaluation-and-results)
-  - [Accuracy and Confidence](#accuracy-and-confidence)
+- [Additional Resources](#additional-resources)
+
+
 
 ---
 
@@ -51,14 +47,15 @@ import os
 os.environ['TCL_LIBRARY'] = "<path_to_tcl>"
 os.environ['TK_LIBRARY'] = "<path_to_tk>"
 ```
-## Mathematical Model
 
-### Geometric Brownian Motion (GBM)
+
+
+
+
+# Mathematical Model
+
+## Geometric Brownian Motion (GBM)
 The project uses GBM to model the stock prices' dynamics under a stochastic process defined by:
-
-- **Drift (µ)**: Represents the average return of the stock.
-- **Volatility (σ)**: Measures the standard deviation of the stock's returns.
-
 
 The differential equation for GBM is:
 
@@ -66,32 +63,132 @@ $$
 dS_t = \mu S_t \, dt + \sigma S_t \, dW_t
 $$
 
-where **dW_t** represents the increment of a Wiener process, modeling the random market fluctuations.
+### **Variable Definitions**
+
+$$
+\begin{aligned}
+dS_t & : \text{ The change in stock price at time } t, \\
+\mu & : \text{ The annualized return (drift)}, \\
+\sigma & : \text{ The annualized volatility (measure of risk)}, \\
+S_t & : \text{ The stock price at time } t, \\
+dW_t & : \text{ The increment of a Wiener process (random market fluctuation)}.
+\end{aligned}
+$$
 
 ---
 
-### Monte Carlo Simulation
-Simulations are conducted by repeatedly sampling possible future stock price paths based on the GBM formula. The simulation considers:
+## Intermediate Formulas
 
-- **Initial Stock Price**: Taken from the latest available price data.
-- **Annualized Return and Volatility**: Calculated from historical data.
-- **Time Horizon and Steps**: Set to one year divided into 252 trading days.
+### **Logarithmic Returns**
+The logarithmic return between two time points is given by:
+
+$$
+r_i = \ln\left(\frac{S_i}{S_{i-1}}\right)
+$$
+
+### **Variable Definitions**
+
+$$
+\begin{aligned}
+S_i & : \text{ The stock price at time } i, \\
+S_{i-1} & : \text{ The stock price at time } i - 1.
+\end{aligned}
+$$
 
 ---
 
-### Discounting to Present Value
-The concept of discounting to present value is critical in determining the current worth of future cash flows from the option's payoffs at maturity. The formula used is:
+### **Mean Log Return**
+The mean log return over \(n\) returns is:
 
 $$
-PV = \frac{CF}{(1 + r)^T}
+\bar{r} = \frac{1}{n} \sum_{i=1}^{n} r_i
 $$
 
-where:
-- **CF** is the future cash flow (payoff),
-- **r** is the risk-free rate,
-- **T** is the time to maturity.
+---
 
-This step adjusts the future payoffs to their present value, accounting for the risk-free rate and highlighting the importance of the time value of money.
+### **Variance and Standard Deviation**
+The variance of the log returns is:
+
+$$
+\sigma^2 = \frac{1}{n} \sum_{i=1}^{n} (r_i - \bar{r})^2
+$$
+
+The standard deviation (volatility) is:
+
+$$
+\sigma = \sqrt{\sigma^2}
+$$
+
+---
+
+### **Annualization**
+To annualize the returns and volatility:
+
+$$
+\mu_{\text{annualized}} = \bar{r} \times 252
+$$
+
+$$
+\sigma_{\text{annualized}} = \sigma \times \sqrt{252}
+$$
+
+### **Variable Definitions**
+
+$$
+252 : \text{ The number of trading days in a year.}
+$$
+
+---
+
+## Monte Carlo Simulation
+The formula for stock price evolution at a time step \(\Delta t\) is:
+
+$$
+S(t + \Delta t) = S(t) \times e^{(\mu - 0.5 \sigma^2) \Delta t + \sigma \sqrt{\Delta t} \cdot z}
+$$
+
+### **Variable Definitions**
+
+$$
+\begin{aligned}
+S(t) & : \text{ The stock price at time } t, \\
+\mu & : \text{ The annualized return (drift)}, \\
+\sigma & : \text{ The annualized volatility}, \\
+\Delta t & : \text{ The time step}, \\
+z & : \text{ A random variable sampled from a standard normal distribution } (z \sim N(0, 1)).
+\end{aligned}
+$$
+
+---
+
+## Discounting to Present Value
+The formula for present value is:
+
+$$
+PV = e^{-rT} \cdot \mathbb{E}[\max(S_T - K, 0)]
+$$
+
+### **Variable Definitions**
+
+$$
+\begin{aligned}
+PV & : \text{ The present value (option price)}, \\
+r & : \text{ The risk-free interest rate}, \\
+T & : \text{ The time to maturity (in years)}, \\
+S_T & : \text{ The stock price at maturity}, \\
+K & : \text{ The strike price}, \\
+\mathbb{E}[\max(S_T - K, 0)] & : \text{ The expected value (mean payoff at maturity)}.
+\end{aligned}
+$$
+
+
+
+
+
+
+
+
+
 
 ## Implementation Details
 
