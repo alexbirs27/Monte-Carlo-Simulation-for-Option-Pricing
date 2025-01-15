@@ -1,8 +1,43 @@
 # Monte Carlo Simulation for Option Pricing
 
-This project leverages Monte Carlo simulation to forecast future stock prices using Geometric Brownian Motion (GBM) and calculates the pricing of European call options based on these simulations. The focus is on the stock prices of a selected company over a specific time frame, and the simulation aims to provide insights into the risk and potential returns of stock options.
+## Overview
+This project implements a Monte Carlo simulation to estimate the price of a European call option based on the Geometric Brownian Motion (GBM) model. The goal is to simulate the future price movements of a stock and determine the fair value of the option, providing insights into the associated risks and potential returns.
 
 ---
+
+## What is a Monte Carlo Simulation for Stock Prices?
+Monte Carlo simulation is a probabilistic technique used to generate a large number of possible scenarios for the evolution of a system. In this context, the system being simulated is the stock price, which follows a random, stochastic process.
+
+- **Main objective**: To estimate the price of an option by analyzing the probable distribution of future stock prices.
+
+---
+
+## Financial Context of the Project
+- A **European call option** gives the holder the right (but not the obligation) to purchase a stock at a predetermined price (called the strike price) at a specified future date.
+- The **value of the option** depends on the expected future price of the stock relative to the strike price. If the stock price at maturity exceeds the strike price, the option has a positive payoff; otherwise, it expires worthless.
+
+---
+
+## Key Components of the Model
+
+### 1. Stock Price Simulation:
+- The future price of the stock is simulated using the GBM model, which incorporates both the drift (expected return) and volatility (random fluctuations) of the stock.
+- The process is repeated thousands of times to account for a wide range of possible price paths.
+
+### 2. Option Payoff Calculation:
+- The payoff of the option for each simulated scenario is computed as the difference between the final stock price and the strike price (if positive).
+
+### 3. Discounting to Present Value:
+- The average expected payoff is discounted using the risk-free interest rate to obtain the present value of the option.
+
+---
+
+## Practical Applications
+This type of simulation is widely used in financial engineering for:
+- **Risk assessment and pricing of financial derivatives**.
+- **Portfolio optimization** by analyzing potential outcomes under different market conditions.
+- **Stress-testing strategies** to evaluate how extreme market movements affect the value of options.
+
 
 ## Contents
 - [Project Setup](#project-setup)
