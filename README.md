@@ -244,7 +244,7 @@ Results are visualized using histograms to represent the distribution of simulat
 The number of simulations is determined using Hoeffding’s inequality to ensure that the estimated option price falls within a tolerable error range with a confidence level of 95%.
 
 ![JNJ](image.png)
-
+![AAPL](AAPL.png)
 
 ### Additional Resources
 - **Monte Carlo Simulation for Finance**: [https://en.wikipedia.org/wiki/Monte_Carlo_method](https://en.wikipedia.org/wiki/Monte_Carlo_method)
